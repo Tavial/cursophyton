@@ -1,0 +1,6 @@
+Jugador: Tatiana ---> Tiempo: 23.6
+Jugador: Alfredo ---> Tiempo: 21.73
+Jugador: Tatiana ---> Tiempo: 59.86
+Jugador: Tatiana ---> Tiempo: 31.3
+Jugador: Alfredo ---> Tiempo: 30.19
+Jugador: Nene ---> Tiempo: 87.14
