@@ -33,7 +33,7 @@ def generaCadena (longitud):
 
 def adivinaCadena (mastermind):
     fin = False
-    print (mastermind)
+    ## print (mastermind) # imprime la cadena a adivinar
     adivinado = 0
     while not fin:
         correcto = False
