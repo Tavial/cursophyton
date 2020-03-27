@@ -1,5 +1,5 @@
 # cursophyton
-27/03/2020 11:46 - Añado un saludador y una aplicación para rellenar un comboBox en PyQt5
+27/03/2020 11:46 - Añado un saludador y una aplicación para rellenar un comboBox en PyQt5 <br/>
 23/03/2020 22:15 - Añado juego Mastermind <br/>
 23/03/2020 17:00 - Añado calculadora con Tkinter <br/>
 22/03/2020 00:30 - Añado juego Reino de Dragones <br/>
