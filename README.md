@@ -1,4 +1,5 @@
 # cursophyton
+29/03/2020 16:04 - Añado una ventana de componentes original y espejo con PyQt5 <br/>
 28/03/2020 12:40 - Añado un generador de números aleatorio con PyQt5 <br/>
 27/03/2020 23:47 - Añado una miniencuesta con PyQt5 <br/>
 27/03/2020 11:46 - Añado un saludador y una aplicación para rellenar un comboBox en PyQt5 <br/>
