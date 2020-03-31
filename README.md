@@ -1,6 +1,6 @@
 # cursophyton
 31/03/2020 21:07 - Añado Receta 6 PyQt5 - Mensaje de bienvenida  <br/>
-31/03/2020 14:40 - Hago una ligera corrección en el código del conversor para validación del campo cantidad <br/>
+31/03/2020 14:40 - Ligera corrección en el código del conversor para validación del campo cantidad <br/>
 30/03/2020 12:16 - Añado un coversor de euros a otras monedas (28 divisas) con PyQt5 </br>
 29/03/2020 16:04 - Añado una ventana de componentes original y espejo con PyQt5 <br/>
 28/03/2020 12:40 - Añado un generador de números aleatorio con PyQt5 <br/>
