@@ -14,7 +14,7 @@ def convertir ():
     cantidad = ui.EditCantidad.text()
     cantidad = str(cantidad)
     #comprobamos que no tengamos de entrada alguna coma en vez de punto o que el campo esté vacío o que no sea un número
-    if cantidad =="" or cantidad.isspace() or cantidad.isalnum() or cantidad.find(",") != -1:
+    if cantidad =="" or cantidad.isspace() or cantidad.isalpha() or cantidad.find(",") != -1:
         mensaje = QMessageBox ()
         mensaje.setWindowTitle ("Error")
         mensaje.setText("No ha introducido un valor válido en el campo Cantidad. El decimal se representa por .")
