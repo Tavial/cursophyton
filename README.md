@@ -1,4 +1,5 @@
 # cursophyton
+01/04/2020 13:50 - Añado Receta 7 PyQt5 - Escoger clase en vuelo de Iberia Madrid-Toronto <br/>
 01/04/2020 11:45 - Añado Gestor de Revistas con PyQt5 (versión Recetas PyQt5) <br/>
 31/03/2020 21:07 - Añado Receta 6 PyQt5 - Mensaje de bienvenida  <br/>
 31/03/2020 14:40 - Ligera corrección en el código del conversor para validación del campo cantidad <br/>
