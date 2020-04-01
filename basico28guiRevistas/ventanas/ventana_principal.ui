@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>APLICACION GESTIÓN REVISTAS</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="lbl_bienvenida">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>220</y>
+      <width>551</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Bienvenido a la aplicación de gestión de revistas usando PyQt5</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuRevistas">
+    <property name="title">
+     <string>Revistas</string>
+    </property>
+    <addaction name="submenu_registrar_revista"/>
+    <addaction name="submenu_listar_revistas"/>
+   </widget>
+   <addaction name="menuRevistas"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="submenu_registrar_revista">
+   <property name="text">
+    <string>Registrar revista</string>
+   </property>
+  </action>
+  <action name="submenu_listar_revistas">
+   <property name="text">
+    <string>Listar revistas</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
