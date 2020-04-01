@@ -1,4 +1,5 @@
 # cursophyton
+01/04/2020 11:45 - Añado Gestor de Revistas con PyQt5 (versión Recetas) <bt/>
 31/03/2020 21:07 - Añado Receta 6 PyQt5 - Mensaje de bienvenida  <br/>
 31/03/2020 14:40 - Ligera corrección en el código del conversor para validación del campo cantidad <br/>
 30/03/2020 12:16 - Añado un coversor de euros a otras monedas (28 divisas) con PyQt5 </br>
