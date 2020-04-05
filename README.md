@@ -1,4 +1,5 @@
 # cursophyton
+05/04/2020 20:10 - Añado aplicación de gestión de modelismo ferroviario en PyQt5+SQL <br/>
 01/04/2020 23:25 - Añado Receta 8 PyQt5 - Hacer pedido de camisas <br/>
 01/04/2020 16:30 - Añado 13 ejercicios de bucles <br/>
 01/04/2020 13:50 - Añado Receta 7 PyQt5 - Escoger clase en vuelo de Iberia Madrid-Toronto <br/>
