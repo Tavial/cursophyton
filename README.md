@@ -1,4 +1,4 @@
-# cursophyton
+# cursopython
 06/04/2020 16:15 - Añado Receta 9 PyQt5 - Complementos para una pizza <br/>
 05/04/2020 20:10 - Añado aplicación de gestión de modelismo ferroviario en PyQt5+SQL <br/>
 01/04/2020 23:25 - Añado Receta 8 PyQt5 - Hacer pedido de camisas <br/>
