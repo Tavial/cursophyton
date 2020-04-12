@@ -4,7 +4,7 @@ Módulo principal de la aplicación MODELISMO FERROVIARIO
 '''
 # importamos de QtWidgets todo lo necesario para trabajar con la ventana, para 
 # crear la aplicación y para mostrar mensajes de texto
-from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog, QTableWidgetItem, QAbstractItemView
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog, QTableWidgetItem
 
 # importamos estos componentes para poder poner una imagen de fondo.
 
@@ -16,9 +16,11 @@ from modelo.clases import Producto
 # archivo constantes_sql.py
 from modelo.constantes_sql import *
 # importamos las ventanas que van a conformar nuestro proyecto
-from ventanas import ventana_principal, ventana_alta, ventana_listados  
-from PyQt5.QtGui import QIcon, QPixmap
-from modelo import operaciones_bd
+from ventanas import ventana_principal, ventana_alta, ventana_listados, ventana_listados_lista, ventana_edicion  
+from PyQt5.QtGui import QPixmap
+from modelo import operaciones_bd, clases
+from PyQt5.Qt import QLabel, QPushButton
+from _functools import partial
 
 
 
@@ -40,7 +42,8 @@ class VentanaPrincipal(QMainWindow): # implementamos la clase VentanaPrincipal q
         
         # Aquí capturamos y tratamos los eventos
         self.v_principal.submenu_nuevo_producto.triggered.connect(self.nuevoProducto)
-        self.v_principal.submenu_listar_productos.triggered.connect(self.listarProductos)
+        self.v_principal.accion_listar_tabla.triggered.connect(self.tablaProductos)
+        self.v_principal.accion_listar_lista.triggered.connect(self.listaProductos)
     
     def decoraPortada (self):
         # ponemos una imagen de fondo de pantalla
@@ -48,9 +51,10 @@ class VentanaPrincipal(QMainWindow): # implementamos la clase VentanaPrincipal q
         # cambiamos el color del texto de la etiqueta principal
         self.v_principal.etq_titulo.setStyleSheet ("color: white")
         # cambiamos el color de fondo de la barra del menú
-        self.v_principal.Menu.setStyleSheet("background-color:white; color:black")
+        self.v_principal.Menu.setStyleSheet("background-color:white; color:black; font-size:22px")
         # cambiamos el color de fondo de las opciones del menún
         self.v_principal.menuProductos.setStyleSheet("background-color:black; color:white ")
+    
     
     def nuevoProducto(self):
         # instanciamos un objeto de la clase Ui_ventanaRegistro creada con el QtDesigner
@@ -80,8 +84,21 @@ class VentanaPrincipal(QMainWindow): # implementamos la clase VentanaPrincipal q
             img = img [2:-1]
             self.v_alta.visor_imagen.setPixmap(QPixmap(img))
             self.image = img
-        
             
+    def cargarImagen_editar (self):
+        dialogo = QFileDialog () #instanciamos un objeto diálogo de la clase QFileDialog
+        archivo = dialogo.getOpenFileName(self,'Escoger archivo','D:\\USUARIOS\\TAVIAL\\DOCUMENTOS\\Python\\Ejercicios\\modelismoFerroviario\\imagenes','Imagen Files (*.png *.jpg *.jpeg *.gif *.bmp)')
+        if archivo [0]:
+            # en la variable archivo se recoge separado por una coma la ruta y el tipo de las imágenes. Lo convertimos a string
+            img = str(archivo)
+            # este string hacemos con él una lista de dos elementos (el separador es la coma)
+            img = img.split(",")
+            # cogemos el primer elemento de la lista (índice 0) ya que contiene la ruta que es lo que nos interesa 
+            img = str(img[0])
+            # quitamos el ( y la ' simple del inicio de la cadena, y la ' final. Nos quedamos con el resto de la cadena
+            img = img [2:-1]
+            self.v_edicion.visor_imagen.setPixmap(QPixmap(img))
+            self.image = img        
     
     def registrarProducto(self):    
         referencia = str(self.v_alta.line_referencia.text())
@@ -89,29 +106,18 @@ class VentanaPrincipal(QMainWindow): # implementamos la clase VentanaPrincipal q
         precio = str(self.v_alta.line_precio.text())
         stock = str(self.v_alta.line_stock.text())
         descripcion = str(self.v_alta.edit_descripcion.toPlainText())
-        info = QMessageBox()
         if referencia =="" or referencia.isspace(): # el campo referencia no tiene valor  
-            info.setWindowTitle ("Faltan campos")
-            info.setText("El campo referencia está en blanco")
-            x = info.exec_()
+            QMessageBox.about(self,"Faltan campos","El campo referencia está en blanco")
         elif nombre =="" or nombre.isspace(): # el campo referencia no tiene valor
-            info.setWindowTitle ("Faltan campos")
-            info.setText("El campo nombre está en blanco")
-            x = info.exec_()
+            QMessageBox.about(self,"Faltan campos","El campo nombre está en blanco")
         elif precio =="" or precio.isspace() or precio.isalpha() or precio.find(",") != -1: 
             # el campo precio o está en blanco o está separado por comas en vez de puntos
-            info.setWindowTitle ("Faltan campos")
-            info.setText("El campo precio o está en blanco o no tiene un formato correcto. El decimal se representa por .")
-            x = info.exec_()   
+            QMessageBox.about(self,"Faltan campos","El campo precio o está en blanco o no tiene un formato correcto. El decimal se representa por .")  
         elif stock =="" or stock.isspace() or stock.isalpha() or stock.find(".") != -1 or stock.find(",") != -1:
             # el campo stock o está en blanco o está separado por comas y puntos por lo que no es un valor entero
-            info.setWindowTitle ("Faltan campos")
-            info.setText("El campo stock o está en blanco o no tiene un formato correcto. Tiene que ser un entero")
-            x = info.exec_() 
-        elif descripcion=="" or descripcion.isspace(): # el campo descripción no tiene valor   
-            info.setWindowTitle ("Faltan campos")
-            info.setText("El campo stock o está en blanco o no tiene un formato correcto. Tiene que ser un entero")
-            x = info.exec_() 
+            QMessageBox.about(self,"Faltan campos","El campo stock o está en blanco o no tiene un formato correcto. Tiene que ser un entero")  
+        elif descripcion=="" or descripcion.isspace(): # el campo descripción no tiene valor
+            QMessageBox.about(self,"Faltan campos","El campo descripción está en blanco")     
         else: #Está todo correcto. Almacenamos los campos en el objeto item que vamos a crear
             item = Producto ()
             item.referencia = referencia
@@ -126,9 +132,7 @@ class VentanaPrincipal(QMainWindow): # implementamos la clase VentanaPrincipal q
             # llamamos al método que almacena todos los campos del objeto item en la BB.DD
             operaciones_bd.registro_producto(item)
         
-            info.setWindowTitle ("OK")
-            info.setText("Se ha guardado el registro con éxito.")
-            x = info.exec_() 
+            QMessageBox.about(self,"OK","Se ha guardado el registro con éxito.")    
             
             #limpiamos los campos: 
             self.v_alta.line_referencia.setText("")
@@ -153,49 +157,172 @@ class VentanaPrincipal(QMainWindow): # implementamos la clase VentanaPrincipal q
         self.v_alta.boton_imagen.setStyleSheet("background-color:#A4C5C6")
         self.v_alta.boton_registrar.setStyleSheet("background-color:#A4C5C6")
         
-     
+    def decorarVentanaEdicion(self):
+          
+        self.setStyleSheet("background-color:#DFCDC3")
+        self.v_edicion.etq_titulo.setStyleSheet("color:black; background-color:#DFCDC3")
+        self.v_edicion.line_nombre.setStyleSheet ("font-size: 16px; background-color:white")
+        self.v_edicion.line_precio.setStyleSheet ("font-size: 16px; background-color:white")
+        self.v_edicion.line_referencia.setStyleSheet ("font-size: 16px; background-color:white")
+        self.v_edicion.line_stock.setStyleSheet ("font-size: 16px; background-color:white")
+        self.v_edicion.combo_escala.setStyleSheet("background-color:white")
+        self.v_edicion.combo_fabricante.setStyleSheet("background-color:white")
+        self.v_edicion.combo_tipo.setStyleSheet("background-color:white")
+        self.v_edicion.edit_descripcion.setStyleSheet("font-size: 16px; background-color:white")
+        self.v_edicion.boton_imagen.setStyleSheet("background-color:#A4C5C6")
+        self.v_edicion.boton_modificar.setStyleSheet("background-color:#A4C5C6")
+        
+    def listaProductos(self): 
+        self.v_lista = ventana_listados_lista.Ui_ventanaListadosLista ()
+        self.v_lista.setupUi(self)
+        self.setStyleSheet("VentanaPrincipal {background-image: none}")
+        self.decorarVentanaListadosLista () 
+        # Llamamos al método listar producto que nos devuelve una lista con los campos de la tabla_productos de la base de datos bd_model_ferro
+        self.lista = operaciones_bd.listar_productos() 
+        for elemento in self.lista:
+            linea1 = "REF: "+str(elemento[0])+"  "+str(elemento[1])+"\n"
+            linea2 = "TIPO: "+str(elemento[2])+"\n"
+            linea3 = "ESCALA: "+str(elemento[3])+"\n"
+            linea4 = "FABRICANTE: "+str(elemento[4])+"\n"
+            linea5 = "PRECIO: "+str(elemento[5])+" €"+"\n"
+            linea6 = "DESCRIPCION: "+str(elemento[7])+"\n"
+            linea7 = "STOCK: "+str(elemento[6])+"\n\n"
+            linea8 = "-----------------------------------------------------------------------------------------------------------\n"
+            texto = linea1+linea2+linea3+linea4+linea5+linea6+linea7+linea8
+            self.v_lista.visor_listado.addItem(texto)
             
-    def listarProductos(self):   
-        self.v_listados = ventana_listados.Ui_ventanaListados()
-        self.v_listados.setupUi(self)    
+            
+    def tablaProductos(self):   
+        self.v_tabla = ventana_listados.Ui_ventanaListados()
+        self.v_tabla.setupUi(self)   
         self.setStyleSheet("VentanaPrincipal {background-image: none}") 
-        self.decorarVentanaListados ()
-        # Llamamos al método listar producto que nos devuelve una lista con los campos de la tabla
+        self.decorarVentanaListadosTabla ()
+        # Llamamos al método listar producto que nos devuelve una lista con los campos de la tabla_productos de la base de datos bd_model_ferro 
         self.lista = operaciones_bd.listar_productos() 
         # Llamamos al método rellenarTabla que rellenerá la Table Widget con los valores extraídos en la consulta
         self.rellenarTabla ()
-        # Controlamos la pulsación sobre las celdas de la tabla. Si se hacen sobre las que su contenido es una URL de 
-        # la imagen del producto, esta se cargará en el campo QLabel que hemos dispuesto para visualizar las imágenes
-        self.v_listados.tabla.cellClicked.connect (self.seleccionarCelda)
-        
-                
+       
+             
     
     def rellenarTabla(self):
         fila = 0
         for registro in self.lista:
-            # insertamos cada fila
-            self.v_listados.tabla.insertRow(fila)
+            # insertamos cada fila      
+            self.v_tabla.tabla.insertRow(fila)
+            self.v_tabla.tabla.setRowHeight(fila,80) 
             columna = 0
             for campo in registro: 
-                celda = QTableWidgetItem(str(campo))              
-                self.v_listados.tabla.setItem  (fila,columna,celda)
-                columna += 1
+                celda = QTableWidgetItem(str(campo))  
+                validador = str(campo)
+                if validador.find(":/") != -1: # es el campo imagen 
+                    ico = QLabel ()
+                    pixmap = QPixmap (validador)
+                    reducido = pixmap.scaled(100,80)
+                    ico.setPixmap(reducido)
+                    ico.setContentsMargins (0, 0, 0, 0)
+                    self.v_tabla.tabla.setCellWidget(fila,columna,ico)
+                else:            
+                    self.v_tabla.tabla.setItem (fila,columna,celda)
+                columna += 1 
+            
+            # añadimos las columnas de botones
+            
+            # VISUALIZAR
+            self.v_tabla.tabla.setColumnWidth(columna,32) # el ancho de la columna será más estrecho
+            self.boton_ver = QPushButton()
+            self.boton_ver.clicked.connect(partial(self.verImagen,validador))  
+            self.boton_ver.setStyleSheet("background-image:url('iconos/ver.png'); background-repeat:no-repeat; background-position:center")
+            self.v_tabla.tabla.setCellWidget(fila,columna,self.boton_ver)
+            
+            #EDITAR
+            self.v_tabla.tabla.setColumnWidth(columna+1,32) # el ancho de la columna será más estrecho
+            self.boton_editar = QPushButton()
+            self.boton_editar.clicked.connect(partial(self.editar,registro[0]))  
+            self.boton_editar.setStyleSheet("background-image:url('iconos/editar.png'); background-repeat:no-repeat; background-position:center")
+            self.v_tabla.tabla.setCellWidget(fila,columna+1,self.boton_editar)
+            
+            #BORRAR  
+            self.v_tabla.tabla.setColumnWidth(columna+2,32) # el ancho de la columna será más estrecho
+            self.boton_borrar = QPushButton()
+            self.boton_borrar.clicked.connect(partial(self.borrar,registro[0]))  
+            self.boton_borrar.setStyleSheet("background-image:url('iconos/borrar.png'); background-repeat:no-repeat; background-position:center")
+            self.v_tabla.tabla.setCellWidget(fila,columna+2,self.boton_borrar)
+                     
             fila += 1
      
-    def seleccionarCelda(self):     
+    def verImagen (self,imagen_a_mostrar):
+        self.v_tabla.visor_imagen.setPixmap(QPixmap(imagen_a_mostrar))
+       
+    
+    def editar (self,registro):
+        print ("Voy a editar el registro con ref: "+str(registro))
+        self.v_edicion = ventana_edicion.Ui_ventanaEdicion()
+        self.v_edicion.setupUi(self)
+        self.decorarVentanaEdicion()
+        self.producto_a_editar = operaciones_bd.obtener_producto(registro)
+        self.v_edicion.line_referencia.setText(self.producto_a_editar.referencia)
+        self.v_edicion.line_referencia.setDisabled (True)
+        self.v_edicion.line_nombre.setText(self.producto_a_editar.nombre)
+        self.v_edicion.combo_tipo.setCurrentText(self.producto_a_editar.tipo) 
+        self.v_edicion.combo_escala.setCurrentText(self.producto_a_editar.escala)
+        self.v_edicion.combo_fabricante.setCurrentText(self.producto_a_editar.fabricante)
+        self.v_edicion.line_precio.setText(str(self.producto_a_editar.precio))
+        self.v_edicion.line_stock.setText(str(self.producto_a_editar.stock)) 
+        self.v_edicion.edit_descripcion.setText(self.producto_a_editar.descripcion)
+        self.v_edicion.visor_imagen.setPixmap(QPixmap(self.producto_a_editar.imagen))
+        self.image = self.producto_a_editar.imagen
         
-        item = self.v_listados.tabla.currentItem().text()
-        icono = str(item)
-        self.v_listados.visor_imagen.setPixmap(QPixmap(icono))
+        # Cuando pulsamos el botón Cargar Imagen llamamos a un método para poder seleccionar la imagen y cargarla
+        self.v_edicion.boton_imagen.clicked.connect(self.cargarImagen_editar)
+        
+        self.v_edicion.boton_modificar.clicked.connect(partial(self.modificarProducto,self.producto_a_editar.referencia))
+        
+        
+        
+    def borrar (self,registro):
+        eleccion = QMessageBox.question(self,"Alerta","Vas a borrar el registro con ref: "+str(registro))
+        
+        if eleccion == QMessageBox.Yes:
+            operaciones_bd.borrar_producto(registro)
+            
+        self.tablaProductos()
+        
+        
+        
 
+    def modificarProducto (self,registro_a_cambiar):
+        eleccion = QMessageBox.question(self,"Alerta","Vas a modificar el registro con ref: "+str(registro_a_cambiar))
+    
+        if eleccion == QMessageBox.Yes:
+            producto_modificado = clases.Producto()
+            producto_modificado.referencia = registro_a_cambiar
+            producto_modificado.nombre = self.v_edicion.line_nombre.text()
+            producto_modificado.tipo = self.v_edicion.combo_tipo.currentText()
+            producto_modificado.escala = self.v_edicion.combo_escala.currentText()
+            producto_modificado.fabricante = self.v_edicion.combo_fabricante.currentText()
+            producto_modificado.precio = float(self.v_edicion.line_precio.text())
+            producto_modificado.stock = int(self.v_edicion.line_stock.text())
+            producto_modificado.descripcion = self.v_edicion.edit_descripcion.toPlainText()
+            producto_modificado.imagen = self.image
+    
+            operaciones_bd.guardar_cambios_producto (producto_modificado)
         
-    def decorarVentanaListados(self):
+            self.tablaProductos()
+        
+    def decorarVentanaListadosTabla(self):
         
         self.setStyleSheet("background-color:#DFCDC3")
-        self.v_listados.tabla.setStyleSheet("color:#204151; font-weight:bold")
-        self.v_listados.etq_principal.setStyleSheet("color:black; background-color:white")
-        self.v_listados.etq_informativa.setStyleSheet("color:#204151")   
-        self.v_listados.visor_imagen.setStyleSheet("background-color:white")      
+        self.v_tabla.tabla.setStyleSheet("color:#204151; font-weight:bold")
+        self.v_tabla.etq_principal.setStyleSheet("color:black; background-color:white")
+        self.v_tabla.etq_informativa.setStyleSheet("color:#204151")   
+        self.v_tabla.visor_imagen.setStyleSheet("background-color:white")  
+        
+    def decorarVentanaListadosLista(self):
+        
+        self.setStyleSheet("background-color:#DFCDC3")
+        self.v_lista.visor_listado.setStyleSheet("color:#204151; font-size:16px; font-weight:bold")
+        self.v_lista.etq_principal.setStyleSheet("color:black; background-color:white")
+          
            
 if __name__ =="__main__":
        
@@ -208,5 +335,3 @@ if __name__ =="__main__":
     v_principal.show()
     # preparamos el evento de salida de la aplicación
     sys.exit (app.exec_())
-    
-        
