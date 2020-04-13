@@ -1,4 +1,5 @@
 # cursopython
+13/04/2020 14:02 - Añado Receta 10 PyQt5 - Heladería - Manejo de grupos de checkbox <br/>
 13/04/2020 00:10 - Añado Gestor de Revistas con SQL con funciones de dar de alta, borrar y editar <br/>
 12/04/2020 14:50 - Añado modificaciones sobre el programa de modelismo ferroviario (borrado y edición) <br/>
 06/04/2020 16:15 - Añado Receta 9 PyQt5 - Complementos para una pizza <br/>
