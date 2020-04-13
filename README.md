@@ -1,4 +1,5 @@
 # cursopython
+13/04/2020 18:45 - Añado Receta 13 PyQt5 - Calculadora de números enteros <br/>
 13/04/2020 16:15 - Añado Receta 12 PyQt5 - Señales y Slots (copiar y pegar) <br/>
 13/04/2020 14:57 - Añado Receta 11 PyQt5 - Señales y Slots <br/>
 13/04/2020 14:02 - Añado Receta 10 PyQt5 - Heladería - Manejo de grupos de checkbox <br/>
