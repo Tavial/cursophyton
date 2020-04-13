@@ -1,4 +1,5 @@
 # cursopython
+13/04/2020 16:15 - Añado Receta 12 PyQt5 - Señales y Slots (copiar y pegar) <br/>
 13/04/2020 14:57 - Añado Receta 11 PyQt5 - Señales y Slots <br/>
 13/04/2020 14:02 - Añado Receta 10 PyQt5 - Heladería - Manejo de grupos de checkbox <br/>
 13/04/2020 00:10 - Añado Gestor de Revistas con SQL con funciones de dar de alta, borrar y editar <br/>
