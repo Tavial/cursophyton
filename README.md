@@ -1,4 +1,5 @@
 # cursopython
+15/04/2020 17:55 - Añado ligeras modificaciones en el programa de modelismo ferroviario para que trabaje con imágenes de cualquier tamaño. <br/>
 15/04/2020 11:20 - Añado modificaciones sobre el programa de modelismo ferroviario (un nuevo campo "tecnología" para el uso de checkbuttons y radio buttons y una clase validador de campos con expresiones regulares <br/>
 13/04/2020 18:45 - Añado Receta 13 PyQt5 - Calculadora de números enteros <br/>
 13/04/2020 16:15 - Añado Receta 12 PyQt5 - Señales y Slots (copiar y pegar) <br/>
