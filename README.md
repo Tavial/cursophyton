@@ -1,4 +1,5 @@
 # cursopython
+15/04/2020 11:20 - Añado modificaciones sobre el programa de modelismo ferroviario (un nuevo campo "tecnología" para el uso de checkbuttons y radio buttons y una clase validador de campos con expresiones regulares <br/>
 13/04/2020 18:45 - Añado Receta 13 PyQt5 - Calculadora de números enteros <br/>
 13/04/2020 16:15 - Añado Receta 12 PyQt5 - Señales y Slots (copiar y pegar) <br/>
 13/04/2020 14:57 - Añado Receta 11 PyQt5 - Señales y Slots <br/>
