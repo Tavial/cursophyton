@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ventanaEdicion</class>
+ <widget class="QMainWindow" name="ventanaEdicion">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1300</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Editar producto</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="line_nombre">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>110</y>
+      <width>521</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Line" name="linea_separadora4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>470</y>
+      <width>1281</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_descripcion">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>610</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Descripción: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_precio">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>350</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Precio:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_stock">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>420</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Stock:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_euro">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>355</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>€</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_referencia">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>110</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Referencia: </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_titulo">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>30</y>
+      <width>501</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::WinPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="text">
+     <string>       EDICIÓN/ MODIFICACIÓN DEL  PRODUCTO</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="boton_modificar">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>790</y>
+      <width>311</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>MODIFICAR</string>
+    </property>
+   </widget>
+   <widget class="Line" name="linea_separadora2">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>40</y>
+      <width>371</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="line_precio">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>350</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Line" name="linea_separadora3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>220</y>
+      <width>1291</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_fabricante">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>280</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Fabricante:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="combo_escala">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>170</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>H0</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>N</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Z</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="etq_escala">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>170</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Escala: </string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="line_referencia">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>110</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Line" name="linea_separadora5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>760</y>
+      <width>1281</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="visor_imagen">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>500</y>
+      <width>300</width>
+      <height>250</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="line_stock">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>420</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="edit_descripcion">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>510</y>
+      <width>391</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="Line" name="linea_separadora1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>401</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="etq_nombre">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>120</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Nombre: </string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="combo_fabricante">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>260</y>
+      <width>271</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>48</width>
+      <height>48</height>
+     </size>
+    </property>
+    <item>
+     <property name="text">
+      <string>Aneste</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/aneste.png</normaloff>../iconos/aneste.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Arnold</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/arnold.png</normaloff>../iconos/arnold.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bachmann</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/bachmann.png</normaloff>../iconos/bachmann.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Brawa</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/brawa.png</normaloff>../iconos/brawa.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Busch</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/busch.png</normaloff>../iconos/busch.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Electrotren</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/electrotren.png</normaloff>../iconos/electrotren.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Esu</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/esu.png</normaloff>../iconos/esu.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Evergreen</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/evergreen.png</normaloff>../iconos/evergreen.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Faller</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/faller.png</normaloff>../iconos/faller.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Fleischmann</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/fleischmann.png</normaloff>../iconos/fleischmann.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Graham Farish</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/grahamFarish.png</normaloff>../iconos/grahamFarish.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hobbytrain</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/hobbytrain.png</normaloff>../iconos/hobbytrain.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hornby</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/hornby.png</normaloff>../iconos/hornby.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Humbrol</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/humbrol.png</normaloff>../iconos/humbrol.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Ibertren</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/ibertren.png</normaloff>../iconos/ibertren.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Jouef</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/jouef.png</normaloff>../iconos/jouef.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Kato</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/kato.png</normaloff>../iconos/kato.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Kibri</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/kibri.png</normaloff>../iconos/kibri.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>K*train</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/ktraini.png</normaloff>../iconos/ktraini.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Lemke</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/lemke.png</normaloff>../iconos/lemke.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Liliput</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/liliput.png</normaloff>../iconos/liliput.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Lima</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/lima.png</normaloff>../iconos/lima.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mabar</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/mabar.png</normaloff>../iconos/mabar.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Maquetren</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/maquetren.png</normaloff>../iconos/maquetren.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Marklin</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/marklin.png</normaloff>../iconos/marklin.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mehano</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/mehano.png</normaloff>../iconos/mehano.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>MF-Train</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/mf-train.png</normaloff>../iconos/mf-train.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>NME</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/NME.png</normaloff>../iconos/NME.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Omnibus Models</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/omnibus.png</normaloff>../iconos/omnibus.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Peco</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/peco.png</normaloff>../iconos/peco.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Piko</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/piko.png</normaloff>../iconos/piko.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rivarossi</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/rivarossi.png</normaloff>../iconos/rivarossi.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Roco</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/roco.png</normaloff>../iconos/roco.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Spectrum</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/spectrum.png</normaloff>../iconos/spectrum.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Startrain</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/startrain.png</normaloff>../iconos/startrain.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sudexpress</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/sudexpress.png</normaloff>../iconos/sudexpress.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Thomas &amp; Friends</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/thomas&amp;friends.png</normaloff>../iconos/thomas&amp;friends.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Trix</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/trix.png</normaloff>../iconos/trix.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Viessmann</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/viessmann.png</normaloff>../iconos/viessmann.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Vitrains Models</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/vitrains.png</normaloff>../iconos/vitrains.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Vollmer</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/vollmer.png</normaloff>../iconos/vollmer.png</iconset>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Woodland Scenics</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../iconos/woodland.png</normaloff>../iconos/woodland.png</iconset>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="etq_tipo">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>175</y>
+      <width>47</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Tipo:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="combo_tipo">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>170</y>
+      <width>261</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>Accesorios y decoración</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Automotores</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Coches</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Máquinas</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Vagones</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sets</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Vías</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="boton_imagen">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>620</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Cargar imagen</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="caja">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>260</y>
+      <width>441</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Tecnología  </string>
+    </property>
+    <widget class="QRadioButton" name="radio_analogica">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Analógica</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radio_digital">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>140</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Digital</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="check_digital">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>140</y>
+       <width>191</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>con sonido</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
