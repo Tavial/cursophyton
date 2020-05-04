@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css')}}">
+    <title>ADMINISTRACION FerroSale - Inicio</title>
+</head>
+<body>
+    <div class="cabecera"> Portal de administración de FERROSALE </div>
+
+    <div class="publicados" >
+         Anuncios publicados
+        <div class="cerrar">  <a href="cerrar-sesion" > CERRAR SESION </a></div>
+        <br/>
+        <br/>
+        <br/>
+            <form action="admin-listados" method="POST" enctype="multipart/form-data">
+                <br/>
+                <div class="escala">
+                    <label for="escala">Escala: </label>
+                    <select name="escala" id="escala" class="caja">
+                        {% for e in var_lista_escalas %}
+                            {% if var_escala | int == e[0] %}
+                                <option value="{{e[0]}}" selected = "selected">{{e[1]}}</option>
+                            {%else%}
+                                <option value="{{e[0]}}">{{e[1]}}</option>
+                            {%endif%}
+                        {% endfor %}
+                        {% if var_escala =="Todos" %}
+                            <option value="Todos" selected ="selected"> Todos </option>
+                        {% else %}
+                            <option value="Todos"> Todos </option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="tipo">
+                    <label for="tipo">Tipo: </label>
+                    <select name="tipo" id="tipo" class="caja">
+                        {% for t in var_lista_tipos %}
+                            {% if var_tipo | int ==t[0] %}
+                                <option value="{{t[0]}}" selected="selected">{{t[1]}}</option>
+                            {% else %}
+                                <option value="{{t[0]}}">{{t[1]}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        {% if var_tipo=="Todos" %}
+                            <option value="Todos" selected = "selected"> Todos </option>
+                        {%else%}
+                            <option value="Todos">Todos</option>
+                        {%endif%}
+                    </select>
+                </div>
+                <div class="validado">
+                    <input type="checkbox" id="check_no_validado" name="check_no_validado">
+                    <label for="check_no_validado"> No Validado </label>
+
+                </div>
+                <br/>
+                 <br/>
+                <div class="boton_listado">
+                    <button type="submit"> VER  </button>
+                </div>
+
+
+            </form>
+        <br/>
+    </div>
+
+    {% for anuncio in var_lista_anuncios  %}
+        <div class="anuncios">
+            <img class="imagen" id="imagen" src="{{ url_for('static', filename='imagenes/'+anuncio[10])}}?{{cache_breaker}}">
+
+            <!-- otra forma:   <img class="imagen" src="static/imagenes/{{anuncio[10]}}"> -->
+            Referencia: <b> {{ anuncio [0] }}</b>
+            <br/>
+            Fecha: <b> {{ anuncio [1] }} </b>
+            <br/>
+            Escala: <b> {{ anuncio [2] }} </b>
+            <br/>
+            Tipo: <b> {{ anuncio [3] }} </b>
+            <br/>
+            <b> {{ anuncio [4] }} </b>
+            <br/>
+            {{anuncio [5] }}
+            <br/>
+            Precio: <b> {{ anuncio [6] }} € </b>
+            <br/>
+            Nombre y apellidos: <b> {{ anuncio[7] }}</b>
+            <br/>
+            Email : <b>  {{ anuncio[8] }}  </b>
+            <br/>
+            ¿Anuncio validado?: <b> {{ anuncio[9] }}</b>
+            <br/>
+            <br/>
+            <a href="admin-editar-anuncio?id={{anuncio[0]}}" title="Editar">
+                <img class="icono" src="../static/iconos/editar.png">
+            </a>
+            <a href="admin-borrar-anuncio?id={{anuncio[0]}}" title="Borrar" onclick="return confirm('¿Estás seguro de borrar este anuncio?');">
+                <!--si en el código JScript del onclick ponemos un return False, cancela el enlace, como sino hiciese nada
+                No quiero cancelarlo siempre, sólo cuando el usuario pulse que no en la ventana de confirmación -->
+                <img class="icono" src="../static/iconos/borrar.png">
+            </a>
+        </div>
+    {%endfor%}
+</body>
+</html>

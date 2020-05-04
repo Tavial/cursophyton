@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilos.css')}}">
+    <title>Se ha producido un error</title>
+</head>
+<body>
+    <div class="anuncio_error">
+        Se ha producido un error en la inserción de datos del anuncio.
+    </div>
+    <div class="regreso">
+        Alguno de los campos introducidos en el formulario no es correcto.
+        <br/>
+        <br/>
+        <a href="/publicar-anuncio"> Volver al formulario </a>
+        <br/>
+        <br/>
+        <a href="/"> Volver a la página de inicio de FerroSale </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilos.css')}}">
+    <title>Title</title>
+</head>
+<body>
+    <div class="anuncio_error">
+        Se ha producido un error en la validación del anuncio.
+    </div>
+    <div class="regreso">
+        El identificador {{valor_id}} del anuncio no coincide con el código de identificación único
+        <br/>
+        <br/>
+        <a href="/"> Volver a la página de inicio de FerroSale </a>
+    </div>
+
+</body>
+</html>

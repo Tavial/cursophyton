@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilos.css')}}">
+    <title>FerroSale. Portal de anuncios</title>
+</head>
+<body>
+    <div class="cabecera"> Portal de anuncios FERROSALE </div>
+    <div class="presentacion">
+        <p>
+            Bienvenido a FerroSale.
+        </p>
+        <p>
+            Si quieres vender material de modelismo ferroviario, puedes publicar tu anuncio gratis
+            y sin necesidad de registro
+        </p>
+        <p>
+            <div class="marca">
+                <a href="publicar-anuncio"> Publica tu anuncio </a>
+            </div>
+            <div class="comentario">
+                <a href="dejar-comentario"> Deja tu comentario </a>
+            </div>
+        </p>
+
+    </div>
+    <br/>
+    <div class="publicados" >
+        Anuncios publicados
+        <br/>
+        <br/>
+            <form action="listados" method="POST" enctype="multipart/form-data">
+                <br/>
+                <div class="escala">
+                    <label for="escala">Escala: </label>
+                    <select name="escala" id="escala" class="caja">
+                        {% for e in var_lista_escalas %}
+                            {% if var_escala | int ==e[0] %}
+                                <option value="{{e[0]}}" selected="selected">{{e[1]}}</option>
+                            {%else%}
+                                <option value="{{e[0]}}">{{e[1]}}</option>
+                            {%endif%}
+                        {% endfor %}
+                        {% if var_escala =="Todos" %}
+                            <option value="Todos" selected="selected">Todos</option>
+                        {%else%}
+                            <option value="Todos">Todos</option>
+                        {%endif%}
+                    </select>
+                </div>
+                <div class="tipo">
+                    <label for="tipo">Tipo: </label>
+                    <select name="tipo" id="tipo" class="caja">
+                        {% for t in var_lista_tipos %}
+                            {% if var_tipo | int ==t[0] %}
+                                <option value="{{t[0]}}" selected="selected">{{t[1]}}</option>
+                            {% else %}
+                                <option value="{{t[0]}}">{{t[1]}}</option>
+                            {%endif%}
+                        {% endfor %}
+                        {% if var_tipo=="Todos" %}
+                            <option value="Todos" selected="selected">Todos</option>
+                        {%else%}
+                            <option value="Todos">Todos</option>
+                        {%endif%}
+                    </select>
+                </div>
+                <div class="boton_listado">
+                    <button type="submit"> VER  </button>
+                </div>
+
+            </form>
+        <br/>
+
+    </div>
+    {% for anuncio in var_lista_anuncios  %}
+
+  <!--    {% if anuncio [9]  == 'SI' %} -->
+
+            <div class="anuncios">
+                <img class="imagen" src="{{ url_for('static', filename='imagenes/'+anuncio[10])}}">
+                <!--  <img class="imagen" src="static/imagenes/{{anuncio[10]}}"> -->
+                Fecha: <b> {{ anuncio [1] }} </b>
+                <br/>
+                Escala: <b> {{ anuncio [2] }} </b>
+                <br/>
+                Tipo: <b> {{ anuncio [3] }} </b>
+                <br/>
+                <b> {{ anuncio [4] }} </b>
+                <br/>
+                {{anuncio [5] }}
+                <br/>
+                Precio: <b> {{ anuncio [6] }} € </b>
+                <br/>
+                Nombre y apellidos: <b> {{ anuncio[7] }}</b>
+                <br/>
+                Email : <b>  {{ anuncio[8] }}  </b>
+            </div>
+
+       <!-- {%endif%}  -->
+    {%endfor%}
+    <footer>
+        <div class="pie">
+            <button type="button">
+                <a class="link_todos" href="/?pagina={{var_pagina_anterior}}"> << </a>
+            </button>
+
+            <label> {{var_texto_paginacion}} </label>
+
+            <button type="button">
+                <a class="link_todos" href="/?pagina={{var_pagina_siguiente}}"> >> </a>
+            </button>
+        </div>
+    </footer>
+</body>
+</html>

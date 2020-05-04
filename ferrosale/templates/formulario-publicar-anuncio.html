@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilos.css')}}">
+    <title>Formulario anuncio</title>
+</head>
+<body>
+    <form class="formulario" action="guardar-anuncio" method="POST" enctype="multipart/form-data">
+        <br/>
+        <label for="escala">Introduce la escala: </label>
+        <select name="escala" id="escala">
+            {% for e in var_lista_escalas %}
+                <option value="{{ e[0]}}">{{e[1]}}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <br/>
+        <label for="tipo"> Introduce el tipo: </label>
+        <select name="tipo" id="tipo">
+            {% for t in var_lista_tipos %}
+                <option value="{{ t[0]}}">{{t[1]}}</option>
+            {% endfor %}
+        </select>
+        <br/>
+        <br/>
+        <hr>
+        <br/>
+        <label> Título del anuncio:  </label>
+        <br/>
+        <textarea type="text" name="titulo" id="titulo" cols="70" rows="1"  placeholder="Ej: 'Vendo locomotora tipo XXXX'(menos de 255 caracteres)" required ="required"></textarea>
+        <br/>
+        <br/>
+        <label> Descripción: </label>
+        <br/>
+        <textarea type="text" name="descripcion" id="descripcion" cols="70" rows="10" placeholder="Opcional (1500 caracteres máx)" maxlenght="1500"></textarea>
+        <br/>
+        <br/>
+        <label for="precio">Precio: </label>
+        <input type="text" name="precio" id="precio" required="required" required pattern="^\d+((\.)\d+)?$" title="valor numérico y parte decimal separada por punto">
+        <br/>
+        <br/>
+        <hr>
+        <br/>
+        <label>Nombre y apellidos: </label>
+        <br/>
+        <input class ="nombre" type="text" name="nombre" id="nombre" required="required" maxlength="100" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+        <br/>
+        <br/>
+        <label>Email: </label>
+        <br/>
+        <input type="text" name="email" id="email" required="required" required pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$">
+        <br/>
+        <br/>
+        <label for="file"> Sube imagen (opcional) </label>
+        <input type="file" name="imagen" id="file" accept="image/jpeg, image/png, image/gif, image/bmp" onchange="ValidacionTamano()">
+        <br/>
+        <hr>
+        <br/>
+        <br/>
+        <button type="submit"> Publicar anuncio </button>
+    </form>
+</body>
+<script>
+    ValidacionTamano = () => {
+        const fi = document.getElementById('file');
+        // Se comprueba el fichero que es seleccionado
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // El tamaño del fichero
+                if (file > 512) {
+                    alert(
+                      "Archivo demasiado grande. Por favor, escoge un archivo de menos de 0.5 MB");
+                    fi.value =""; // Reseteamos el valor
+                    fi.files[0].name="";
+                }
+            }
+        }
+    }
+</script>
+
+</html>

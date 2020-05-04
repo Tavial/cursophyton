@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilos.css')}}">
+    <title>Comentarios</title>
+</head>
+<body>
+    <div class="chat_titulo"> Deja tu comentario: </div>
+    <br/>
+    <div class="chat_comentarios">
+        <label for="todos" class="chat_etiquetas"> Todos los comentarios </label>
+        <textarea id="todos" class="chat_cajas" name="todos" rows="25" cols="90" readonly="readonly" ></textarea>
+    </div>
+
+    <div class="chat_usuario">
+        <label for="nombre" class="chat_etiquetas"> Nombre </label>
+        <input type="text" class="chat_cajas" id="nombre" name="nombre"/>
+        <br/>
+        <br/>
+        <label for="mensaje" class="chat_etiquetas" > Tu comentario </label>
+        <textarea id="mensaje" name="mensaje" rows="3" cols="90"  class="chat_cajas"></textarea>
+    </div>
+    <br/>
+    <br/>
+    <div class="chat_botonera">
+        <button id="boton_enviar_mensaje" type="button"> Envíar comentario </button>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <a href="/"> Volver a FerroSale </a>
+    </div>
+
+    <!--  <div id="info"> </div> -->
+
+    <script type="text/javascript" src="static/jscript/jquery.js"> </script>
+    <script type="text/javascript">
+        $("#boton_enviar_mensaje").click(function(){
+            nombre = $("#nombre").val()
+            mensaje = $("#mensaje").val()
+            $("#mensaje").val("");
+            // alert("mandar mensaje al servidor: "+nombre+" "+mensaje)
+            // Voy a enviarlo a registrar mensaje
+            $.ajax({
+                url:"registrar-mensaje",
+                data: {n: nombre, m:mensaje},
+                success: function (res){
+                    if (res != "ok"){
+                        alert ("Error en el envío del mensaje")
+                    }
+                } //success
+            }); //end AJAX
+         }); // end clic
+
+         function refrescar(){ //Cada segundo refresca los mensajes del servidor
+            ahora = new Date();
+            //$("#info").html(ahora)
+            //para pedir un json desde jquery, jquery nos da la siguiente función
+            $.getJSON("obtener-mensajes",function(res){
+                texto="";
+                for (indice in res)
+                {
+                    texto += res[indice][1]+": "+res[indice][2] +"\n\n";
+                }
+                $("#todos").html(texto);
+             }); // getJSON
+         } //refrescar
+         setInterval(refrescar,2000) //ejecuta la función refrescar cada 2 segundos
+    </script>
+</body>
+</html>

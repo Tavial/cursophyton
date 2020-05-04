@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css')}}">
+    <title>ADMINISTRACION FerroSale - Edición</title>
+</head>
+<body>
+    <h1 class="publicados"> ADMINISTRADOR - MODIFICAR ANUNCIO</h1>
+    <form class="formulario" action="modificar-anuncio" method="POST" enctype="multipart/form-data">
+        <br/>
+        <label for="escala">Introduce la escala: </label>
+        <select name="escala" id="escala">
+            {% if var_anuncio[1] =="H0" %}
+                <option value="1" selected="selected">H0</option>
+            {% else %}
+                <option value="1">H0</option>
+            {% endif %}
+
+            {% if var_anuncio[1] =="N" %}
+                <option value="2" selected="selected">N</option>
+            {% else %}
+                <option value="2">N</option>
+            {% endif %}
+
+            {% if var_anuncio[1] =="Z" %}
+                <option value="3" selected="selected">Z</option>
+            {% else %}
+                <option value="3">Z</option>
+            {% endif %}
+        </select>
+        <br/>
+        <br/>
+        <label for="tipo"> Introduce el tipo: </label>
+        <select name="tipo" id="tipo">
+            {% if var_anuncio[2] =="Máquinas" %}
+                <option value="1" selected = "selected">Máquinas</option>
+            {% else %}
+                <option value="1">Máquinas</option>
+            {% endif %}
+
+            {% if var_anuncio[2] =="Automotores" %}
+                <option value="2" selected = "selected">Automotores</option>
+            {% else %}
+                <option value="2">Automotores</option>
+            {% endif %}
+
+            {% if var_anuncio[2] =="Vagones" %}
+                <option value="3" selected ="selected">Vagones</option>
+            {% else %}
+                <option value="3">Vagones</option>
+            {% endif %}
+
+            {% if var_anuncio[2] =="Coches" %}
+                <option value="4" selected ="selected">Coches</option>
+            {% else %}
+                <option value="4">Coches</option>
+            {% endif %}
+
+            {% if var_anuncio[2] =="Sets" %}
+                <option value="5" selected="selected">Sets</option>
+            {% else %}
+                <option value="5">Sets</option>
+            {% endif %}
+            {% if var_anuncio[2] =="Vías" %}
+                <option value="6" selected="selected">Vías</option>
+            {% else %}
+                <option value="6">Vías</option>
+            {% endif %}
+            {% if var_anuncio[2] =="Accesorios" %}
+                <option value="7" selected="selected">Accesorios</option>
+            {% else %}
+                <option value="7">Accesorios</option>
+            {% endif %}
+        </select>
+        <br/>
+        <br/>
+        <hr>
+        <br/>
+        <label> Título del anuncio:  </label>
+        <br/>
+        <textarea type="text" name="titulo" id="titulo" cols="70" rows="1"  required ="required" >{{var_anuncio[3]}}</textarea>
+        <br/>
+        <br/>
+        <label> Descripción: </label>
+        <br/>
+        <textarea type="text" name="descripcion" id="descripcion" cols="70" rows="10" >{{var_anuncio[4]}}</textarea>
+        <br/>
+        <br/>
+        <label for="precio">Precio: </label>
+        <input type="text" name="precio" id="precio" required="required" required pattern="^\d+((\.)\d+)?$" title="valor numérico y parte decimal separada por punto" value="{{var_anuncio[5]}}">
+        <br/>
+        <br/>
+        <hr>
+        <br/>
+        <label>Nombre y apellidos: </label>
+        <br/>
+        <input class ="nombre" type="text" name="nombre" id="nombre" required="required" maxlength="100" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" value="{{var_anuncio[6]}}">
+        <br/>
+        <br/>
+        <label>Email: </label>
+        <br/>
+        <input type="text" name="email" id="email" required="required" required pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" value="{{var_anuncio[7]}}">
+        <br/>
+        <br/>
+        <hr>
+        <br/>
+        <label for="emailOK"> ¿Anuncio validado?: </label>
+        <select name="emailOK" id="emailOK" >
+            {% if var_anuncio[8] =="NO" %}
+                <option selected = "selected">NO</option>
+            {% else %}
+                <option>NO</option>
+            {% endif %}
+
+            {% if var_anuncio[8] =="SI" %}
+                <option selected = "selected">SI</option>
+            {% else %}
+                <option>SI</option>
+            {% endif %}
+        </select>
+        <br/>
+        <br/>
+        <label for="file" > Sube imagen (opcional) </label>
+        <input type="file" name="imagen" id="file" accept="image/jpeg, image/png, image/gif, image/bmp" onchange="ValidacionTamano()">
+        <br/>
+        <hr>
+
+        <br/>
+        <!--asociamos este formulario a un valor de id, pero el usuario no puede verlo type="hidden" -->
+        <input type="hidden" name="id" value="{{var_anuncio[0]}}">
+        <br/>
+        <br/>
+        <button type="submit"> Modificar anuncio </button>
+    </form>
+</body>
+<script>
+    ValidacionTamano = () => {
+        const fi = document.getElementById('file');
+        // Se comprueba el fichero que es seleccionado
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // El tamaño del fichero
+                if (file > 512) {
+                    alert(
+                      "Archivo demasiado grande. Por favor, escoge un archivo de menos de 0.5 MB");
+                    fi.value =""; // Reseteamos el valor
+                    fi.files[0].name="";
+                }
+            }
+        }
+    }
+</script>
+</html>

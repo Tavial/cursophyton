@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css')}}">
+    <title>Página de identificacion</title>
+</head>
+<body>
+    <div class="cabecera"> Bienvenido al portal de administración de FERROSALE </div>
+
+    <div class="publicados">
+        <p class="parrafo"> Introduce la contraseña para entrar </p>
+
+        <div class="error">{{error_login}}</div>
+
+        <form class="parrafo" action="login-admin" method="POST">
+            <label for="clave"> Contraseña:   </label>
+            <input type="password" name="clave"  id="clave" />
+            <br/>
+            <br/>
+            <button class="acceder" type="submit" value="ACCEDER">ACCEDER</button>
+        </form>
+    </div>
+</body>
+</html>
