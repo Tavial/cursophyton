@@ -1,0 +1,256 @@
+Creamos una carpeta Py que llamamos aquasale.
+
+Dentro de esta carpeta aquasale crearemos un nuevo proyecto Django que llamaremos portal_anuncios
+Esto lo hacemos por consola de comandos con la instrucción: python -m django startproject portal_anuncios
+
+Por tanto nos queda esta estructura de carpetas
+aquasale
+   |
+   --> portal_anuncios (mysite)
+            |
+            --> portal_anuncios (carpeta del proyecto) - NO SE TOCA EXCEPTO PONER NUESTRAS APPS Y LAS URLS DE NUESTRAS APPS
+            |          |
+            |          |    ...
+            |          ---> settings.py (configura el proyecto. Aquí solo vamos a poner la apps que usemos en INSTALLED_APPS)
+            |          |
+            |          ---> urls.py (equivalente a las @app.route de Flask. Aquí solo vamos a poner las URLs de las apps que creemos)
+            |          |    ...
+            |
+            --> manage.py  (hace lo que le digamos desde la consola de comandos)
+
+
+para ejecutar la aplicación tenemos que acceder desde la consola de comandos al directorio
+aquasale/portal_anuncios (que es el que tiene el manage.py) y ejecutar la siguiente sentencia:
+
+python manage.py runserver
+
+Si todo va bien cogemos la dirección que tenemos en consola http://127.0.0.1:8000/ y lo pegamos en el
+navegador y tiene que aparecer una web con un cohete indicando que la instalación funcionó correctamente.
+
+Nos aparece también un archivo llamado db.sqlite. Lo vamos abrir desde la aplicación DB Browser.
+En el menú superior pulsamos Abrir base de datos y buscamos en el árbol de directorio donde está el
+archivo db.sqlite3 de nuestro proyecto portal_anuncios. En estructura nos indica que está vacía (Tablas (0),
+índices (0)...etc). Django las creará cuando se lo vayamos indicando.
+
+Vamos a crear la primera app de nuestro portal_anuncios que la vamos a llamar anuncios (que contendrá registrar, editar, borrar
+anuncios. Todo lo referente a anuncios lo vamos a meter aquí). IMPORTANTE: La programación siempre se hace sobre
+la app NO SE HACE sobre el portal básico (portal_anuncios). Va tener una parte de vista (html) que permita a
+los usuarios ver los anuncios que tenemos y mostrar un enlace para registrar nuevo anuncio.
+Vamos a la ventana de comandos (si teníamos la aplicación arrancada la paramos con la instrucción CTRL C)
+y ponemos la instrucción.
+
+python manage.py startapp anuncios
+
+Nos crea un nueva carpeta anuncios quedando el árbol de directorios de la siguiente forma:
+
+aquasale
+   |
+   --> portal_anuncios (mysite)
+            |
+            --> anuncios (app)
+            |          |
+            |          |    ...
+            |          ---> views.py (Aquí creamos las funciones. Similar al flask_app pero solo para anuncios)
+            |          |    ...
+            |
+            --> portal_anuncios (portal base) NO SE TOCA EXCEPTO PONER NUESTRAS APPS Y LAS URLS DE NUESTRAS APPS
+            |          |
+            |          |    ...
+            |          ---> settings.py (configura el proyecto. Aquí solo vamos a poner la apps que usemos en INSTALLED_APPS)
+            |          |
+            |          ---> urls.py (equivalente a las @app.route de Flask. Aquí solo vamos a poner las URLs de las apps que creemos)
+            |          |    ...
+            |
+            --> manage.py  (hace lo que le digamos desde la consola de comandos)
+            |
+            --> db.sqlite3 (archivo para la configuración de la base de datos)
+
+En views.py de la app anuncios programamos nuestra primera función del portal.
+La llamamos inicio y por ahora sólo mostrará un mensaje de bienvenida al portal.
+
+def inicio (request): # las funciones de Django tienen que pedir un request. Tienen que dar un resultado.
+    return HttpResponse ("Portal AquaSale. Página de inicio")
+
+Hay que añadir un import: from django.http import HttpResponse.
+
+Ahora tenemos que indicar en qué ruta se va a ejecutar la función inicio que acabamos de crear.
+Eso se hace en un archivo de urls (el equivalente a @app.route). Creamos este archivo en nuestra app
+anuncios y lo rellenamos de la siguiente forma:
+
+----------------- urls.py en anuncios    ---------------------------------------------
+
+# Equivalente al @app.route de Django
+# hacemos las siguientes importaciones
+from django.urls import path # la podemos traer del urls.py del base
+# ahora necesitamos traer las funciones de las rutas. Estas funciones las hemos creado en el
+# archivo views.py por lo que lo tenemos que importar:
+from . import views
+# aquí ponemos todas las rutas que debemos tener y qué función se ejecuta en cada una.
+# Esto es como cuando poníamos en Flask lo de @app.route("/")
+urlpatterns = [
+    path("",views.inicio)
+
+]
+---------------------------------------------------------------------------------------
+
+aquasale
+   |
+   --> portal_anuncios (mysite)
+            |
+            --> anuncios (app)
+            |          |
+            |          |    ...
+            |          ---> views.py (Aquí creamos las funciones. Similar al flask_app pero solo para anuncios)
+            |          |
+            |          ---> urls.py (Indicamos en qué ruta se va a ejecutar la funciones)
+            |          |    ...
+            |          |
+            --> portal_anuncios (portal base) NO SE TOCA EXCEPTO PONER NUESTRAS APPS Y LAS URLS DE NUESTRAS APPS
+            |          |
+            |          |    ...
+            |          ---> settings.py (configura el proyecto. Aquí solo vamos a poner la apps que usemos en INSTALLED_APPS)
+            |          |
+            |          ---> urls.py (equivalente a las @app.route de Flask. Aquí solo vamos a poner las URLs de las apps que creemos)
+            |          |    ...
+            |
+            --> manage.py  (hace lo que le digamos desde la consola de comandos)
+            |
+            --> db.sqlite3 (archivo para la configuración de la base de datos)
+
+
+Una vez creada una ruta, y la función que se ejecuta ante esta ruta, hay que decir al
+proyecto de python que tenga en cuenta nuestra app anuncios y sus rutas.
+
+Esta es la única modificación que hacemos en la app base general portal_anuncios. Se hace en dos
+pasos en el archivo settings.py:
+
+1º PASO
+-------
+
+En la app anuncios hay un archivo que se llama apps.py. Esta contiene una clase denominada
+AnunciosConfig(AppConfig). Para incluir nuestra app nos vamos al settings.py del proyecto base y
+en INSTALLED_APPS ponemos lo siguiente:
+
+'[nombre_de_app].apps.[nombre_clase]'
+
+INSTALLED_APPS = [
+    'anuncios.apps.AnunciosConfig',
+    ...
+]
+
+2º PASO
+-------
+Tenemos que incluir las URLs de esa app en urls.py del portal general
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('anuncios/',include("anuncios.urls")),
+
+    ###### path (todas las rutas que empiecen por 'anuncios/' tienen que estar gestionadas por anuncios.url)
+
+Con esto ya podemos probar nuestra aplicación
+
+*****************************
+python manage.py runserver
+****************************
+
+Tenemos que entrar en la parte /anuncios ya que Django crea automáticamente la parte /admin.
+
+Tenemos que hacer las vistas (html).
+Nos vamos a anuncios.
+Ahí creamos la carpeta templates y aquí vamos a crear un HTML que se va a llamar
+index.html.
+Creamos también en anuncios una carpeta static y dentro de ella creamos otra css. Aquí creamos
+la hoja de estilos para el área usuario que la llamamos usuario.css
+
+En el index.html creamos un enlace que define como ruta "registrar-anuncio" y que nos tendría que llevar
+a un formulario para introducir los datos del anuncio. En la parte inferior de este index posteriormente
+añadiremos el listado de nuestros anuncios registrados.
+
+Para mostrar esta plantilla index cambiamos el mensaje de bienvenida por lo siguiente en el
+archivo views.py: return render (request,"index.html")
+
+Ahora vamos a programar la ruta "registrar-anuncio".
+1º Creamos la función en views.py de anuncios
+def registrar_anuncio (request):
+    return render (request, "formulario-registro.html")
+
+Esta plantilla aún no existe. Posteriormente la crearemos.
+
+2º Añadimos la URL en urls.py y ponemos la ruta:
+ path("registrar-anuncio",views.registrar_anuncio)
+
+3º Creamos el formulario en html.
+
+Una vez pulsado el botón "Publicar anuncio" nos envía a la
+ruta "guardar-anuncio" que tiene que capturar los datos del formulario y guardarlos en una base
+de datos.
+
+Ahora vamos a programar la ruta "guardar-anuncio": (seguimos los mismos pasos de antes)
+1º Creamos la función en views.py de anuncios
+
+def guardar_anuncio (request):
+    #cogemos el valor de los campos del formulario:
+    id_tipo_form = request.GET["radio"]
+    id_categoria_form = request.GET["categoria"]
+    titulo_form = request.GET["titulo"]
+    descripcion_form = request.GET["descripcion"]
+    precio_form = request.GET["precio"]
+    nomyapell_form = request.GET["nomyapell"]
+    email_form = request.GET["email"]
+
+
+2º Añadimos la URL de la ruta en urls.py y ponemos la ruta:
+    path("guardar-anuncio",views.guardar_anuncio)
+
+3º Creamos en html la página que va a indicar que el anuncio se ha guardado con éxito. Pero antes
+  tenemos que crear las clases en models.py para que almacenen los datos recogidos. Se hace de la siguiente forma:
+
+ * Vamos al archivo models.py de la carpeta anuncios. Aquí crearemos las clases y Django automáticamente con estas
+ clases creará las tablas. Creamos la clase Anuncio. Las clases que creemos obligatoriamente tienen
+ que heredar de una clase que tiene Django preparada llamada Model.
+
+class Tipo(models.Model):
+    nombre = models.CharField(max_length=25)
+
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=25)
+
+class Anuncio(models.Model):
+    id_tipo = models.ForeignKey(Tipo,on_delete=models.CASCADE)
+    id_categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=3000,blank=True)
+    precio = models.FloatField(default=0)
+    nomyapell = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+
+HAY QUE PARAR EL SERVIDOR y poner python manage.py makemigrations. Actualiza cambios en los modelos.
+Un modelo es una clase que representa una tabla
+Ahora para que realmente haga los cambios necesarios en las tablas hay que poner:
+python manage.py migrate
+
+Para registrar vamos al código de Views y solo tenemos que añadir estas líneas:
+
+# la primera para recoger los datos que hemos obtenido del formulario en el objeto anuncio de la clase Anuncio que creamos antes
+anuncio = Anuncio (id_tipo = id_tipo_form, id_categoria = id_categoria_form, titulo = titulo_form, descripcion = descripcion_form, precio = precio_form, nomyapell = nomyapell_form, email = email_form )
+# y esta segunda le dice a Django que lo meta en la base de datos.
+anuncio.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
