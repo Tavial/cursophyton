@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{%static 'css/usuario.css' %}">
+    <title> AquaSale. Inicio</title>
+</head>
+<body>
+    <div class="caja_titulo">
+        <p class="titulo"> Bienvenido a AQUASALE </p>
+    </div>
+    <div class="acuario">
+            <img class= "imagen_acuario" src="../static/iconos/acuario.gif"/>
+    </div>
+    <div class="presentacion">
+        <p class="index_informacion"> El portal de anuncios de la flora y fauna acuática. </p>
+        {% if "id_usuario" not in request.session %} <!--Mostramos el mensaje si el usuario no está identificado en la sesión-->
+            Necesitas registrarte para publicar tu anuncio.
+        {% endif %}
+        <br/>
+    </div>
+    <div class="index_caja_enlaces">
+         <!-- Vemos si el usuario está identificado en la sesión -->
+        {% if "id_usuario" in request.session %} <!--se pone así. Si está indentificado permite insertar anuncio-->
+            <div class="caja_enlace_reg_anuncio">
+                <a class="link" href="registrar-anuncio"> Registra tu anuncio </a>
+            </div>
+            <div class="caja_enlace_gest_anuncio">
+                <a class="link" href="tus-anuncios"> Gestiona tus anuncios </a>
+            </div>
+            <div class="caja_enlace_logout_usuario">
+                <a class="link" href="logout-usuario"> Cerrar sesión </a>
+            </div>
+        {% else %}
+            <div class="caja_enlace_reg_portal">
+                <a class="link" href="registrar-usuario"> Regístrate en el portal </a>
+            </div>
+            <div class="caja_enlace_log_usuario">
+                <a class="link" href="login-usuario"> Iniciar sesión </a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="caja_buscador">
+        <form action="">
+            <div class="buscador_titulo">
+                <label class="link"> Título: </label>
+                <input class="edit_titulo" type="text" name="titulo" id="titulo" value="{{buscador}}"/>
+            </div>
+            <div class="buscador_tipo">
+                <label class="link"> Tipo: </label>
+                <select name="tipo" class="edit_tipo">
+                    {% if tipo_elegido == -1 %}
+                        <option value="-1" selected="selected"> Todos los tipos </option>
+                    {% else %}
+                        <option value="-1"> Todos los tipos </option>
+                    {% endif %}
+                    {% for t in tipos %}
+                        {% if tipo_elegido == t.id %}
+                            <option value="{{t.id}}" selected="selected">{{t.nombre}}</option>
+                        {% else %}
+                            <option value="{{t.id}}">{{t.nombre}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="buscador_categoria">
+                <label class="link"> Categoria: </label>
+                <select name="categoria" class="edit_categoria">
+                    {% if categoria_elegida == -1 %}
+                        <option value="-1" selected="selected"> Todas las categorias </option>
+                    {% else %}
+                        <option value="-1"> Todas las categorias </option>
+                    {% endif %}
+                    {% for c in categorias %}
+                        {% if categoria_elegida == c.id %}
+                            <option value="{{c.id}}" selected="selected">{{c.nombre}}</option>
+                        {% else %}
+                            <option value="{{c.id}}">{{c.nombre}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="buscador_buscar">
+                <button type="submit" > BUSCAR </button>
+            </div>
+            <div class="buscador_todos">
+                <a class="link" href="/anuncios"> TODOS </a>
+            </div>
+        </form>
+    </div>
+    <div class="caja_listado">
+        <p class="listado"> Listado de anuncios: </p>
+    </div>
+    <div class="caja_anuncios">
+    {% for anuncio in anuncios %}
+        <div class="anuncios">
+            <div class="anuncio_foto">
+                {% if anuncio.foto %} <!--Si existe el atributo imagen-->
+                    <img class="imagen" src="{{ anuncio.foto.url}}">
+                {% else %}
+                    <img class="imagen" src="../static/iconos/sin_imagen.png">
+                {% endif %}
+            </div>
+            <div class="anuncio_texto">
+                Fecha: <b> {{ anuncio.fecha }} </b>
+                <br/>
+                Tipo: <b> {{ anuncio.tipo.nombre }} </b>
+                <br/>
+
+                Categoría: <b> {{ anuncio.categoria.nombre }} </b>
+                <br/>
+                <b> {{ anuncio.titulo }} </b>
+                <br/>
+                {{anuncio.descripcion}}
+                <br/>
+                Precio: <b> {{ anuncio.precio }} € </b>
+                <br/>
+                Nombre y apellidos: <b> {{ anuncio.nomyapell }}</b>
+                <br/>
+                Email : <b>  {{ anuncio.usuario.email }}  </b>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="caja_paginas">
+        {% if anterior >= 0 %}
+            <div class="anterior">
+                <a class="link" href="/anuncios?comienzo={{anterior}}&tipo_elegido={{tipo_elegido}}&categoria_elegida={{categoria_elegida}}&buscador={{buscador}}">ANTERIOR</a>
+            </div>
+        {% endif %}
+        {% if siguiente < total_anuncios %}
+            <div class="siguiente">
+                <a class="link" href="/anuncios?comienzo={{siguiente}}&tipo_elegido={{tipo_elegido}}&categoria_elegida={{categoria_elegida}}&buscador={{buscador}}">SIGUIENTE</a>
+            </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>

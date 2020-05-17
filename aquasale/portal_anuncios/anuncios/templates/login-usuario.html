@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{%static 'css/usuario.css' %}">
+    <title>AquaSale. Login</title>
+</head>
+<body>
+    <div class="caja_registra">
+        <p class="registra"> Inicia sesión </p>
+    </div>
+    <div class="formulario" >
+        <form action="identificar-usuario" method="post" enctype="multipart/form-data"> <!-- con enctype permite subir archivos binarios, imágenes. Esto solo sirve para post -->
+            {% csrf_token %}  <!--Solo para POST Django hace la protección para que no se registre dos veces el mismo formulario.-->
+            <div class="caja_nombre">
+                <label class="etiqueta"> Email: </label>
+                <br/>
+                <br/>
+                <input class="caja_formulario" type="text" name="email" id="email" required="required" required pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$">
+            </div>
+            <span>
+                {{error_login}}
+            </span>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Contraseña: </label>
+                <br/>
+                <br/>
+                <input class="caja_formulario" type="password" name="clave" id="clave" required="required">
+            </div>
+            <div class="caja_boton">
+                <button type="submit"> Entrar en Aquasale </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

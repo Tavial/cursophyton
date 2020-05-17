@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{%static 'css/usuario.css' %}">
+    <script type="text/javascript" src="{%static 'js/javascript.js' %}"></script>
+    <title>AquaSale. Formulario de registro de anuncio </title>
+</head>
+<body>
+    <div class="caja_registra">
+        <p class="registra"> Registra tu anuncio </p>
+    </div>
+    <div class="formulario" >
+        <form action="guardar-anuncio" method="post" enctype="multipart/form-data"> <!-- con enctype permite subir archivos binarios, imágenes. Esto solo sirve para post -->
+            {% csrf_token %}  <!--Solo para POST Django hace la protección para que no se registre dos veces el mismo formulario.-->
+            <div class="caja_categoria">
+                <label class="etiqueta"> Tipo: </label>
+                <br/>
+                <br/>
+                {% for t in tipos %}
+                    {% if t.id == 1 %} <!--Tenemos que dejar marcada una opción del radio button para que siempre tenga algún valor -->
+                        <input type="radio" checked="checked" name="radio" value="{{t.id}}">{{t.nombre}}
+                    {% else %}
+                        <input type="radio" name="radio" value="{{t.id}}">{{t.nombre}}
+                    {% endif %}
+                    <br/>
+                {% endfor %}
+                <br/>
+                <br/>
+            </div>
+            <div class="caja_categoria">
+                <label class="etiqueta"> Categoría: </label>
+                <br/>
+                <br/>
+                <select class="caja_formulario" name="categoria">
+                    {% for c in categorias %}
+                        <option value="{{c.id}}"> {{c.nombre}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Título: </label>
+                <br/>
+                <br/>
+                <textarea class="caja_textarea" type="text" name="titulo" id="titulo" cols="55" rows="1" required ="required"></textarea>
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Descripción: </label>
+                <br/>
+                <br/>
+                <textarea class="caja_textarea" type="text" name="descripcion" id="descricion" cols="55" rows="10" placeholder="Opcional (1500 caracteres máx)" maxlenght="1500"></textarea>
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Precio (€): </label>
+                <br/>
+                <br/>
+                <input class="caja_precio" type="text" name="precio" id="precio" required="required" required pattern="^\d+((\.|,)\d+)?$" >
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Nombre y apellidos: </label>
+                <br/>
+                <br/>
+                <input class="caja_textarea" type="text" name="nomyapell" id="nomyapell" required="required" maxlength="100" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$">
+            </div>
+            <!-- Quitamos el email. Al obligar al usuario a iniciar sesión para insertar anuncio ya sabemos su email
+            <div class="caja_nombre">
+                <label class="etiqueta"> Email: </label>
+                <br/>
+                <br/>
+                <input class="caja_formulario" type="text" name="email" id="email" required="required" required pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$">
+            </div> -->
+            <div class="caja_boton">
+                <label class="etiqueta"> Sube una imagen (opcional) </label>
+                <input class="caja_archivo" type="file" name="foto" id="foto" accept="image/jpeg, image/png, image/gif, image/bmp" onchange="ValidacionTamano()">
+            </div>
+            <div class="caja_boton">
+                <button type="submit"> Publicar anuncio </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{%static 'css/usuario.css' %}">
+    <title>AquaSale. Se ha producido un error</title>
+</head>
+<body>
+    <div class="anuncio_ko_caja">
+         <label class="anuncio_ko_label">Se ha producido un error en la inserción de datos. </label>
+    </div>
+    <div class="informacion_ko_caja">
+        <label class="anuncio_ko_informacion"> Alguno de los campos introducidos en el formulario es erróneo.</label>
+    </div>
+    <div class="anuncio_ko_imagen">
+        <img class="harleyquinn"  src="../static/iconos/seguridad.jpg">
+    </div>
+
+    <div class="anuncio_ko_caja2">
+        <a href="/anuncios" class="anuncio_ko_link"> Volver a la página de inicio de AquaSale </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{%static 'css/usuario.css' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/usuario.css' %}">
+    <title>AquaSale. Editar anuncio</title>
+</head>
+
+<body>
+    <div class="caja_registra">
+        <p class="registra"> Actualiza tu anuncio </p>
+    </div>
+    <div class="formulario" >
+        <form action="guardar-cambios-anuncio" method="post" enctype="multipart/form-data"> <!-- con enctype permite subir archivos binarios, imágenes. Esto solo sirve para post -->
+            {% csrf_token %}  <!--Solo para POST Django hace la protección para que no se registre dos veces el mismo formulario.-->
+            <div class="caja_categoria">
+                <label class="etiqueta"> Tipo: </label>
+                <br/>
+                <br/>
+                {% for t in tipos %}
+                    {% if t.id == anuncio.tipo.id %} <!-- tipo seleccionado-->
+                        <input type="radio" checked="checked" name="radio" value="{{t.id}}">{{t.nombre}}
+                    {% else %}
+                        <input type="radio" name="radio" value="{{t.id}}">{{t.nombre}}
+                    {% endif %}
+                    <br/>
+                {% endfor %}
+                <br/>
+                <br/>
+            </div>
+            <div class="caja_categoria">
+                <label class="etiqueta"> Categoría: </label>
+                <br/>
+                <br/>
+                <select class="caja_formulario" name="categoria">
+                    {% for c in categorias %}
+                        {% if c.id == anuncio.categoria.id %}
+                            <option value="{{c.id}}" selected="selected"> {{c.nombre}} </option>
+                        {% else %}
+                            <option value="{{c.id}}"> {{c.nombre}} </option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Título: </label>
+                <br/>
+                <br/>
+                <textarea class="caja_textarea" type="text" name="titulo" id="titulo" cols="55" rows="1" required ="required">{{anuncio.titulo}}</textarea>
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Descripción: </label>
+                <br/>
+                <br/>
+                <textarea class="caja_textarea" type="text" name="descripcion" id="descricion" cols="55" rows="10" placeholder="Opcional (1500 caracteres máx)" maxlenght="1500">{{anuncio.descripcion}}</textarea>
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Precio (€): </label>
+                <br/>
+                <br/>
+                <input class="caja_precio" type="text" name="precio" id="precio" required="required" required pattern="^\d+((\.|,)\d+)?$"  value="{{anuncio.precio}}" >
+            </div>
+            <div class="caja_nombre">
+                <label class="etiqueta"> Nombre y apellidos: </label>
+                <br/>
+                <br/>
+                <input class="caja_textarea" type="text" name="nomyapell" id="nomyapell" required="required" maxlength="100" required pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" value="{{anuncio.nomyapell}}">
+            </div>
+            <input type="hidden" name="id_anuncio" value="{{anuncio.id}}"/>
+            <div class="caja_boton">
+                {% if anuncio.foto %}
+                    <img class="imagen" name="imagen" src="{{anuncio.foto.url}}" id="imagen">
+                {% else %}
+                    <img class="imagen" name="imagen" src="../static/iconos/sin_imagen.png" id="imagen">
+                {% endif %}
+                <label> Sube una imagen (opcional) </label>
+                <input class="caja_archivo" type="file" name="foto" id="foto" accept="image/jpeg, image/png, image/gif, image/bmp" onchange="previewImage();">
+            </div>
+            <div class="caja_boton">
+                <button type="submit"> Modificar anuncio </button>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="{%static 'js/javascript.js' %}"></script>
+
+</html>
