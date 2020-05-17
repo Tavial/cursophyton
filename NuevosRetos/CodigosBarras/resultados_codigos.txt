@@ -1,0 +1,18 @@
+El código 4104090001209 es: EAN-13 - País: Alemania - Dígito de control correcto
+El código 5449000056672 es: EAN-13 - País: Bélgica & Luxemburgo - Dígito de control correcto
+El código 4046871004712 es: EAN-13 - País: Alemania - Dígito de control correcto
+El código 8718951179042 es: EAN-13 - País: Holanda - Dígito de control correcto
+El código 5425008811000 es: EAN-13 - País: Bélgica & Luxemburgo - Dígito de control correcto
+El código 7508203003178 es: EAN-13 - País: México - Dígito de control correcto
+El código 8437558160016 es: EAN-13 - País: España - Dígito de control correcto
+El código 65839522 es: EAN-8 - Dígito de control correcto
+El código 61940017 es: EAN-8 - Dígito de control correcto
+El código 40170725 es: EAN-8 - Dígito de control correcto
+El código 95050003 es: EAN-8 - Dígito de control correcto
+El código 95050003 es: EAN-8 - Dígito de control correcto
+ - Dígito de control incorrecto
+El código 8412345678905 es: EAN-13 - País: España - Dígito de control correcto
+El código 8412345678905 es: EAN-13 - País: España - Dígito de control correcto
+ - El código 41004090001209 NO es correcto
+El código 0000410040900 es: EAN-13 - País: Estados Unidos & Canadá - Dígito de control correcto
+El código 0 es: salir
