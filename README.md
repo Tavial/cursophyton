@@ -1,5 +1,7 @@
 # cursopython
-17/05/2020 12:05 - Añado una nueva sección de retos de programación en Python. Reto 1 - Códigos de barras <br/>
+18/05/2020 18:35 - Añado Reto 3 - Constante de Kaprekar <br/>
+18/05/2020 15:30 - Añado Reto 2 - El Bar de Javier </br>
+17/05/2020 12:05 - Añado una nueva sección de ¡Acepta el reto! de programación en Python. Reto 1 - Códigos de barras <br/>
 17/05/2020 11:35 - Añado portal de anuncios de seres vivos de acuario desarrollado en Django <br/>
 04/05/2020 10:30 - Añado portal de anuncios de material ferroviario desarrollado en Flask <br/>
 15/04/2020 17:55 - Añado ligeras modificaciones en el programa de modelismo ferroviario para que trabaje con imágenes de cualquier tamaño. <br/>
