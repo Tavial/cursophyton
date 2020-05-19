@@ -1,0 +1,79 @@
+Dimension de la matriz: 3
+
+4 9 2 
+3 5 7 
+8 1 6 
+
+Cuadrado mágico DIABÓLICO con constante mágica 15
+ ESOTÉRICO con constante mágica2 20
+
+------------------------------------------
+Dimension de la matriz: 2
+
+1 2 
+3 4 
+
+No es un cuadrado mágico diabólico
+
+------------------------------------------
+Dimension de la matriz: 4
+
+16 3 2 13 
+5 10 11 8 
+9 6 7 12 
+4 15 14 1 
+
+Cuadrado mágico DIABÓLICO con constante mágica 34
+ ESOTÉRICO con constante mágica2 34
+
+------------------------------------------
+Dimension de la matriz: 3
+
+28 21 26 
+23 25 27 
+24 29 22 
+
+Cuadrado mágico DIABÓLICO con constante mágica 75
+
+------------------------------------------
+Dimension de la matriz: 3
+
+2 8 1 
+6 3 5 
+7 4 9 
+
+No es un cuadrado mágico diabólico
+
+------------------------------------------
+Dimension de la matriz: 7
+
+22 47 16 41 10 35 4 
+5 23 48 17 42 11 29 
+30 6 24 49 18 36 12 
+13 31 7 25 43 19 37 
+38 14 32 1 26 44 20 
+21 39 8 33 2 27 45 
+46 15 40 9 34 3 28 
+
+Cuadrado mágico DIABÓLICO con constante mágica 175
+ ESOTÉRICO con constante mágica2 100
+
+------------------------------------------
+Dimension de la matriz: 8
+
+1 63 62 4 5 59 58 8 
+56 10 11 53 52 14 15 49 
+48 18 19 45 44 22 23 41 
+25 39 38 28 29 35 34 32 
+33 31 30 36 37 27 26 40 
+24 42 43 21 20 46 47 17 
+16 50 51 13 12 54 55 9 
+57 7 6 60 61 3 2 64 
+
+Cuadrado mágico DIABÓLICO con constante mágica 260
+ ESOTÉRICO con constante mágica2 130
+
+------------------------------------------
+Dimension de la matriz: 0
+
+------------------------------------------
