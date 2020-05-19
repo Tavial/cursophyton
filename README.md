@@ -1,4 +1,5 @@
 # cursopython
+19/05/2020 21:25 - Añado Reto 4 - Cuadrados diabólicos y esotéricos (matrices) <br/>
 18/05/2020 18:35 - Añado Reto 3 - Constante de Kaprekar <br/>
 18/05/2020 15:30 - Añado Reto 2 - El Bar de Javier </br>
 17/05/2020 12:05 - Añado una nueva sección de ¡Acepta el reto! de programación en Python. Reto 1 - Códigos de barras <br/>
