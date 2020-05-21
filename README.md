@@ -1,4 +1,5 @@
 # cursopython
+21/05/2020 23:05 - Añado Reto 6 - Problemas de Herencia - Sumas de Riemann </br>
 20/05/2020 23:35 - Añado Reto 5 - Encriptación de ficheros - Método polialfabético de Vigenere <br/>
 19/05/2020 21:25 - Añado Reto 4 - Cuadrados diabólicos y esotéricos (matrices) <br/>
 18/05/2020 18:35 - Añado Reto 3 - Constante de Kaprekar <br/>
