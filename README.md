@@ -1,4 +1,5 @@
 # cursopython
+23/10/2020 9:00 - Añado un API REST de prueba para django rest framework llamado hub
 27/05/2020 21:25 - Añado Reto 7 - Equilibrio en estructuras móviles (Árboles binarios) <br/>
 21/05/2020 23:05 - Añado Reto 6 - Problemas de Herencia - Sumas de Riemann </br>
 20/05/2020 23:35 - Añado Reto 5 - Encriptación de ficheros - Método polialfabético de Vigenere <br/>
